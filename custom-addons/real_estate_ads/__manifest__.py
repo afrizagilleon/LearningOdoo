@@ -9,7 +9,9 @@
     """,
     "category" : "Sales",
     "depends" : [],
-    "data" : [],
+    "data" : [
+        'security/ir.model.access.csv',
+    ],
     "installable": True,
     "application": True,
     "license": "AGPL-3",
