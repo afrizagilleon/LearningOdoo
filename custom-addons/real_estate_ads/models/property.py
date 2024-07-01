@@ -6,6 +6,8 @@ class Property(models.Model):
     _description = 'Property description'
 
     name = fields.Char(string='Name', required=True)
+    type_id = fields.Many2one('estate.property.type', string='Type')
+    tags_id = fields.Many2many('estate.property.tags', string='Tags')
     description = fields.Text(string='Description')
     post_code = fields.Char(string='Postcode')
     date_availability = fields.Datetime(string='Available From')
@@ -23,4 +25,17 @@ class Property(models.Model):
 
     # will be explained soon 
     # id, create_date, create_uid, write_date, write_uid
-    
+
+
+class PropertyType(models.Model):
+    _name = 'estate.property.type'
+    _description = "Define the type of property"
+    name = fields.Char(string='Property Type')
+
+
+class PropertyTag(models.Model):
+    _name = 'estate.property.tags'
+    _description = "Categoruize property with tags"
+
+    name = fields.Char(string='Tag')
+
