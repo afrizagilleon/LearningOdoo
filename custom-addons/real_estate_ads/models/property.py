@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class Property(models.Model):
@@ -23,11 +23,19 @@ class Property(models.Model):
         ('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')
     ], string='Garden Orientation', default='north')
 
+    total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
+
     # Relations
     offer_ids = fields.Many2many('estate.property.offer',
+                                 'property_id',
                                  string='Offers')
     sales_id = fields.Many2one('res.users', string='Salesman')
     buyer_id = fields.Many2one('res.users', string='Buyer')
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+        for rect in self:
+            rect.total_area = rect.garden_area + rect.living_area
 
 
 class PropertyType(models.Model):
