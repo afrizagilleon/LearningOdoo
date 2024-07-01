@@ -23,8 +23,8 @@ class Property(models.Model):
         ('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')
     ], string='Garden Orientation', default='north')
 
-    # will be explained soon 
-    # id, create_date, create_uid, write_date, write_uid
+    offer_ids = fields.Many2many('estate.property.offer',
+                                 string='Offers')
 
 
 class PropertyType(models.Model):

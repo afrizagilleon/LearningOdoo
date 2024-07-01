@@ -8,7 +8,7 @@
         Real Estate module to show available properties
     """,
     "category" : "Sales",
-    "depends" : [],
+    "depends" : ["base"],
     "data" : [
         'security/ir.model.access.csv',
         'views/property.xml',
