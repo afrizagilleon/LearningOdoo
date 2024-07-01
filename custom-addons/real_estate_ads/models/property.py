@@ -26,9 +26,9 @@ class Property(models.Model):
     total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
 
     # Relations
-    offer_ids = fields.Many2many('estate.property.offer',
-                                 'property_id',
-                                 string='Offers')
+    offer_ids = fields.One2many('estate.property.offer',
+                                'property_id',
+                                string='Offers')
     sales_id = fields.Many2one('res.users', string='Salesman')
     buyer_id = fields.Many2one('res.users', string='Buyer')
 
