@@ -23,8 +23,11 @@ class Property(models.Model):
         ('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')
     ], string='Garden Orientation', default='north')
 
+    # Relations
     offer_ids = fields.Many2many('estate.property.offer',
                                  string='Offers')
+    sales_id = fields.Many2one('res.users', string='Salesman')
+    buyer_id = fields.Many2one('res.users', string='Buyer')
 
 
 class PropertyType(models.Model):
@@ -38,4 +41,3 @@ class PropertyTag(models.Model):
     _description = "Categoruize property with tags"
 
     name = fields.Char(string='Tag')
-
