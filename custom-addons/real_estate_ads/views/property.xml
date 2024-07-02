@@ -69,6 +69,7 @@
                                     <group>
                                         <field name="sales_id" />
                                         <field name="buyer_id" />
+                                        <field name="buyer_phone" />
                                     </group>
                                 </page>
                             </notebook>

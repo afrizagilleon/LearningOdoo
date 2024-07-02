@@ -30,7 +30,8 @@ class Property(models.Model):
                                 'property_id',
                                 string='Offers')
     sales_id = fields.Many2one('res.users', string='Salesman')
-    buyer_id = fields.Many2one('res.users', string='Buyer')
+    buyer_id = fields.Many2one('res.partner', string='Buyer', domain=[('is_company', '=', True)])
+    buyer_phone = fields.Char(string='Buyer Phone', related='buyer_id.phone')
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
