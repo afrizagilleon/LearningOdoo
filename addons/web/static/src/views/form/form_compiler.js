@@ -644,7 +644,7 @@ export class FormCompiler extends ViewCompiler {
      */
     compileSheet(el, params) {
         const sheetBG = createElement("div");
-        sheetBG.className = "o_form_sheet_bg";
+        sheetBG.className = "o_form_sheet_bg mx-auto";
 
         const sheetFG = createElement("div");
         sheetFG.className = "o_form_sheet position-relative";
