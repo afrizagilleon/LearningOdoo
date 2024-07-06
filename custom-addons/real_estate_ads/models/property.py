@@ -6,6 +6,12 @@ class Property(models.Model):
     _description = 'Property description'
 
     name = fields.Char(string='Name', required=True)
+    state = fields.Selection([
+        ('new', 'New'),
+        ('received', 'Offer Received'),
+        ('sold', 'Sold'),
+        ('cancel', 'Canceled'),
+    ], default='new', string='Status', required=True)
     type_id = fields.Many2one('estate.property.type', string='Type')
     tags_id = fields.Many2many('estate.property.tags', string='Tags')
     description = fields.Text(string='Description')
@@ -37,6 +43,20 @@ class Property(models.Model):
     def _compute_total_area(self):
         for rect in self:
             rect.total_area = rect.garden_area + rect.living_area
+
+    # actions
+    def action_sold(self):
+        self.state = 'sold'
+
+    def action_cancel(self):
+        self.state = 'cancel'
+
+    offer_count = fields.Integer(string="Offer Count", compute='_compute_offer_count')
+
+    @api.depends('offer_ids')
+    def _compute_offer_count(self):
+        for rec in self:
+            rec.offer_count = len(rec.offer_ids)
 
 
 class PropertyType(models.Model):

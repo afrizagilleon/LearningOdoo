@@ -7,6 +7,7 @@ class Offer(models.Model):
     _name = "estate.property.offer"
     _description = "Offers of the property"
 
+    name = fields.Char(string="Description", compute="_compute_name")
     price = fields.Float(string="Price")
     status = fields.Selection(
         [('accepted', 'Accepted'), ('rejected', 'Rejected')],
@@ -43,6 +44,16 @@ class Offer(models.Model):
     def _set_deadline(self):
         for rec in self:
             rec.validity = (rec.deadline - rec.creation_date).days
+
+    @api.depends('property_id', 'partner_id')
+    def _compute_name(self):
+        for rec in self:
+            if rec.partner_id and rec.property_id:
+                rec.name = f"{rec.property_id.name} - {rec.partner_id.name}"
+            else:
+                rec.name = False
+
+
 
     # ORM Command
     # def write(self, vals):

@@ -14,6 +14,7 @@
         'views/property.xml',
         'views/property_type.xml',
         'views/property_tags.xml',
+        'views/property_offer.xml',
         'views/menu_items.xml',
 
         # data
