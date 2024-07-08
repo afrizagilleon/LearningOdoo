@@ -24,6 +24,7 @@ class Property(models.Model):
     living_area = fields.Integer(string='Living Area(sqm)')
     facades = fields.Integer(string='Facades')
     garage = fields.Boolean(string='Garage', default=False)
+    garden = fields.Boolean(string='Garden', default=False)
     garden_area = fields.Integer(string='Garden Area')
     garden_orientation = fields.Selection([
         ('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')
@@ -58,6 +59,14 @@ class Property(models.Model):
         for rec in self:
             rec.offer_count = len(rec.offer_ids)
 
+    def action_property_view_offers(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'estate.property.offer',
+            'name': f'{self.name} - Offers',
+            'domain': [('property_id', '=', self.id)],
+            'view_mode': 'tree',
+        }
 
 class PropertyType(models.Model):
     _name = 'estate.property.type'
@@ -70,3 +79,4 @@ class PropertyTag(models.Model):
     _description = "Categoruize property with tags"
 
     name = fields.Char(string='Tag')
+    color = fields.Char(string="Color")

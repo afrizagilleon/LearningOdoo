@@ -15,6 +15,7 @@
                     <field name="selling_price" />
                     <field name="best_offer_price" />
                     <field name="expected_price" />
+                    <field name="state" widget="badge" />
                 </tree>
             </field>
         </record>
@@ -31,12 +32,12 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button" name="%(real_estate_ads.action_property_offer)d" type="action">
+                            <button class="oe_stat_button" name="action_property_view_offers" type="object">
                                 <field name="offer_count" string="Offers" widget="statinfo"/>
                             </button>
                         </div>
                         <group>
-                            <field name="name" placeholder="Masukkan nama"> Name </field>
+                            <field name="name" widget="char_emojis" placeholder="Masukkan nama"/>
                             <field name="tags_id" placeholder="Property Tags" widget="many2many_tags"/>
                             <group>
                                 <field name="state"/>
@@ -55,12 +56,13 @@
                                     <page string="Description">
                                         <group>
                                             <field name="description" />
-                                            <field name="bedrooms" />
+                                            <field name="bedrooms"/>
                                             <field name="living_area" />
                                             <field name="facades" />
-                                            <field name="garage" />
-                                            <field name="garden_area" />
-                                            <field name="garden_orientation" />
+                                            <field name="garage" widget="boolean_toggle"/>
+                                            <field name="garden" widget="boolean_toggle" />
+                                            <field name="garden_area" invisible="garden==False"/>
+                                            <field name="garden_orientation" invisible="garden==False" widget="selection_badge"/>
                                             <field name="total_area" />
                                         </group>
                                     </page>
@@ -71,16 +73,16 @@
                                                     <field name="partner_id"/>
                                                     <field name="creation_date"/>
                                                     <field name="validity"/>
-                                                    <field name="deadline"/>
+                                                    <field name="deadline" widget="remaining_days"/>
                                                     <field name="status" nolabel="1"/>
                                                 </tree>
                                             </field>
                                     </page>
                                     <page string="Other info">
                                         <group>
-                                            <field name="sales_id" />
+                                            <field name="sales_id" widget="many2one_avatar"/>
                                             <field name="buyer_id" />
-                                            <field name="buyer_phone" />
+                                            <field name="buyer_phone" widget="phone" />
                                         </group>
                                     </page>
                                 </notebook>
