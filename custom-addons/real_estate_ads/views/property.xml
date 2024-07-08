@@ -35,6 +35,23 @@
             </field>
         </record>
 
+        <record id="estate_property_calendar_view" model="ir.ui.view">
+            <field name="name">estate.property.calendar</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date_availability"
+                          string="Properties" mode="month"
+                          event_open_popup="true"
+                          quick_create="false"
+                          quick_create_view_id="estate_property_form_view"
+                >
+                    <field name="name"/>
+                    <field name="date_availability"/>
+                    <field name="post_code"/>
+                </calendar>
+            </field>
+        </record>
+
         <record id="estate_property_graph_view" model="ir.ui.view">
             <field name="name">estate.property.graph</field>
             <field name="model">estate.property</field>
@@ -193,7 +210,7 @@
         <record id="action_property" model="ir.actions.act_window">
             <field name="name">Property</field>
             <field name="res_model">estate.property</field>
-            <field name="view_mode">tree,pivot,form,kanban,graph</field>
+            <field name="view_mode">tree,pivot,calendar,form,kanban</field>
             <field name="view_id" ref="estate_property_kanban_view"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
