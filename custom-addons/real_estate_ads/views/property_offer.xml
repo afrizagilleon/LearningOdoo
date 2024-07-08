@@ -26,15 +26,18 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="price"/>
-                            <field name="status"/>
-                            <field name="partner_id"/>
-                            <field name="property_id"/>
-                        </group>
-                        <group>
-                            <field name="validity"/>
-                            <field name="creation_date"/>
-                            <field name="deadline"/>
+                            <group>
+                                <field name="price"/>
+                                <field name="status"/>
+                                <field name="partner_id"/>
+                                <field name="property_id"/>
+                            </group>
+                            <group>
+                                <field name="validity"/>
+                                <field name="creation_date"/>
+                                <field name="deadline"/>
+<!--                                <field name="partner_email"/>-->
+                            </group>
                         </group>
                     </sheet>
                 </form>

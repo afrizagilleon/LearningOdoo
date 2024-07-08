@@ -3,8 +3,31 @@ from datetime import timedelta
 from odoo.exceptions import ValidationError
 
 
+# class AbstractOffer(models.AbstractModel):
+#     _name = "abstract.model.offer"
+#     _description = "Abstract Offer"
+#
+#     partner_email = fields.Char(string="Email")
+#     partner_phone = fields.Char(string="Phone")
+
+class TransientOffer(models.TransientModel):
+    _name = 'transient.model.offer'
+    _description = 'Transient Offer'
+
+    # _transient_max_count = 0
+    #  it will destroy a value if the max reached, zero if unlimited
+
+    # _transient_max_hours = 0
+    # it will destroy any value that reach max hour stay in database
+
+    # @api.autovacuum
+    # def _transient_offer(self):
+    # It will be called when the new record created
+
+
 class Offer(models.Model):
     _name = "estate.property.offer"
+    # _inherit = ['abstract.model.offer']
     _description = "Offers of the property"
 
     name = fields.Char(string="Description", compute="_compute_name")
@@ -52,8 +75,6 @@ class Offer(models.Model):
                 rec.name = f"{rec.property_id.name} - {rec.partner_id.name}"
             else:
                 rec.name = False
-
-
 
     # ORM Command
     # def write(self, vals):
