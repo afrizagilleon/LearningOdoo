@@ -78,10 +78,33 @@ class Offer(models.Model):
                 rec.name = False
 
     def action_accept_offer(self):
+        if self.property_id:
+            self._validate_accept_offer()
+            self.property_id.write({
+                'selling_price': self.price,
+                'state': 'accepted',
+            })
+            self.property_id.selling_price = self.price
         self.status = 'accepted'
+
+    def _validate_accept_offer(self):
+        offer_ids = self.env['estate.property.offer'].search([
+            ('property_id', '=', self.property_id.id),
+            ('status', '=', 'accepted'),
+        ])
+        if offer_ids:
+            raise ValidationError(_("You have an accepted offer already"))
 
     def action_decline_offer(self):
         self.status = 'rejected'
+        offers_count = self.property_id.offer_count
+        is_all_offers_declined = self.property_id.offer_ids.mapped('status') == ['rejected'] * offers_count
+        if is_all_offers_declined:
+            self.property_id.write({
+                'selling_price': self.price,
+                'state': 'received',
+            })
+            self.property_id.selling_price = 0
 
     # ORM Command
     # def write(self, vals):

@@ -9,6 +9,7 @@ class Property(models.Model):
     state = fields.Selection([
         ('new', 'New'),
         ('received', 'Offer Received'),
+        ('accepted', 'Offer Accepted'),
         ('sold', 'Sold'),
         ('cancel', 'Canceled'),
     ], default='new', string='Status', required=True)
@@ -18,8 +19,8 @@ class Property(models.Model):
     post_code = fields.Char(string='Postcode')
     date_availability = fields.Datetime(string='Available From')
     expected_price = fields.Float(string='Expected Price')
-    selling_price = fields.Float(string='Selling Price')
-    best_offer_price = fields.Float(string='Best Offer Price')
+    selling_price = fields.Float(string='Selling Price', readonly=True)
+    best_offer_price = fields.Float(string='Best Offer Price', compute='_compute_best_offer')
     bedrooms = fields.Integer(string='Bedrooms')
     living_area = fields.Integer(string='Living Area(sqm)')
     facades = fields.Integer(string='Facades')
@@ -58,6 +59,14 @@ class Property(models.Model):
     def _compute_offer_count(self):
         for rec in self:
             rec.offer_count = len(rec.offer_ids)
+
+    @api.depends('offer_ids')
+    def _compute_best_offer(self):
+        for rec in self:
+            if rec.offer_ids:
+                self.best_offer_price = max(rec.offer_ids.mapped('price'))
+            else:
+                self.best_offer_price = 0
 
     # def action_property_view_offers(self):
     #     return {
