@@ -146,13 +146,16 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button" name="real_estate_ads.action_property_offer" type="action">
-                                <field name="offer_count" string="Offers" widget="statinfo"/>
+                            <button icon="fa-handshake-o"
+                                    class="oe_stat_button" name="real_estate_ads.action_property_offer" type="action">
+                                <field name="offer_count" class="p-3" string="Offers" widget="statinfo"/>
                             </button>
                         </div>
                         <group>
                             <field name="name" widget="char_emojis" placeholder="Masukkan nama"/>
-                            <field name="tags_id" placeholder="Property Tags" widget="many2many_tags"/>
+                            <field name="tags_id" placeholder="Property Tags"
+                                   options="{'color_field': 'color'}"
+                                   widget="many2many_tags" />
                             <group>
                                 <field name="state"/>
                                 <field name="type_id"/>
@@ -182,15 +185,20 @@
                                     </page>
                                     <page string="Offers">
                                         <field name="offer_ids" >
-                                                <tree editable="bottom">
-                                                    <field name="price"/>
-                                                    <field name="partner_id"/>
-                                                    <field name="creation_date"/>
-                                                    <field name="validity"/>
-                                                    <field name="deadline" widget="remaining_days"/>
-                                                    <field name="status" nolabel="1"/>
-                                                </tree>
-                                            </field>
+                                            <tree decoration-success="status=='accepted'" decoration-danger="status=='rejected'"
+                                                  editable="bottom">
+                                                <field name="price"/>
+                                                <field name="partner_id"/>
+                                                <field name="creation_date"/>
+                                                <field name="validity"/>
+                                                <field name="deadline" widget="remaining_days"/>
+                                                <field name="status" readonly="1"/>
+                                                <button name="action_accept_offer"
+                                                        type="object" icon="fa-check" string="Accept"/>
+                                                <button name="action_decline_offer"
+                                                        type="object" icon="fa-times" string="Decline"/>
+                                            </tree>
+                                        </field>
                                     </page>
                                     <page string="Other info">
                                         <group>

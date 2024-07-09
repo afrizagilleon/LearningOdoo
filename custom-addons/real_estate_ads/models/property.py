@@ -68,6 +68,7 @@ class Property(models.Model):
     #         'view_mode': 'tree',
     #     }
 
+
 class PropertyType(models.Model):
     _name = 'estate.property.type'
     _description = "Define the type of property"
@@ -79,4 +80,4 @@ class PropertyTag(models.Model):
     _description = "Categoruize property with tags"
 
     name = fields.Char(string='Tag')
-    color = fields.Char(string="Color")
+    color = fields.Integer(string="Color")

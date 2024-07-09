@@ -39,9 +39,10 @@ class Offer(models.Model):
     validity = fields.Integer(string="Validity")
     deadline = fields.Date(
         string="Deadline",
-        default=fields.Date.today() + timedelta(days=1),
+        default=fields.Date.today() + timedelta(days=7),
         compute="_compute_deadline", inverse="_set_deadline", )
-    creation_date = fields.Date(string="Creation Date", default=fields.Datetime.now)
+    creation_date = fields.Date(string="Creation Date",
+                                readonly=True, default=fields.Datetime.now)
 
     # Relations
     partner_id = fields.Many2one('res.partner', string="Partner", required=True)
@@ -75,6 +76,12 @@ class Offer(models.Model):
                 rec.name = f"{rec.property_id.name} - {rec.partner_id.name}"
             else:
                 rec.name = False
+
+    def action_accept_offer(self):
+        self.status = 'accepted'
+
+    def action_decline_offer(self):
+        self.status = 'rejected'
 
     # ORM Command
     # def write(self, vals):
