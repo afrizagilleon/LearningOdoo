@@ -7,7 +7,9 @@
         </menuitem>
         <menuitem id="menu_property_settings" name="Settings" >
             <menuitem id="menu_property_type" name="Property Types" action="real_estate_ads.action_property_type" />
-            <menuitem id="menu_property_tags" name="Property Tags" action="real_estate_ads.action_property_tags" />
+            <menuitem id="menu_property_tags" name="Property Tags"
+                      groups="real_estate_ads.group_property_manager"
+                      action="real_estate_ads.action_property_tags" />
         </menuitem>
     </menuitem>
 </odoo>

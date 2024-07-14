@@ -10,8 +10,12 @@
     "category" : "Sales",
     "depends" : ["base"],
     "data" : [
+        # groups
         'security/ir.model.access.csv',
         'security/res_groups.xml',
+        'security/model_access.xml',
+
+        #views
         'views/property.xml',
         'views/property_type.xml',
         'views/property_tags.xml',
