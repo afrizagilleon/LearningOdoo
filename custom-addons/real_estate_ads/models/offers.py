@@ -106,6 +106,14 @@ class Offer(models.Model):
             })
             self.property_id.selling_price = 0
 
+    def extend_offer_deadline(self):
+        activ_ids = self._context.get('active_ids', [])
+        # print(activ_ids)
+        if activ_ids:
+            offer_ids = self.env['estate.property.offer'].browse(activ_ids)
+            for offer in offer_ids:
+                offer.validity += 10
+
     # ORM Command
     # def write(self, vals):
     #     x = self.env['res.partner'].search([
