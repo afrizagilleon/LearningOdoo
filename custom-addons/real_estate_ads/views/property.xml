@@ -150,6 +150,10 @@
                                     class="oe_stat_button" name="real_estate_ads.action_property_offer" type="action">
                                 <field name="offer_count" class="p-3" string="Offers" widget="statinfo"/>
                             </button>
+                            <!--<button icon="fa-handshake-o"
+                                    class="oe_stat_button" name="action_url_action" type="object">
+                                <field name="offer_count" class="p-3" string="Test URL Action" widget="statinfo"/>
+                            </button>-->
                         </div>
                         <group>
                             <field name="name" widget="char_emojis" placeholder="Masukkan nama"/>

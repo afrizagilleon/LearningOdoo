@@ -68,6 +68,15 @@ class Property(models.Model):
             else:
                 self.best_offer_price = 0
 
+
+    # def action_url_action(self):
+    #     return {
+    #         'type': 'ir.actions.act_url',
+    #         'url': 'https://odoo.com',
+    #         'target': 'new'  # new and self-> open in the current tab
+    #     }
+
+
     # def action_property_view_offers(self):
     #     return {
     #         'type': 'ir.actions.act_window',
