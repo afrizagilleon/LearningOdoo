@@ -114,6 +114,11 @@ class Offer(models.Model):
             for offer in offer_ids:
                 offer.validity += 10
 
+    def _extend_offer_deadline(self):
+        offer_ids = self.env['estate.property.offer'].search([])
+        for offer in offer_ids:
+            offer.validity += 1
+
     # ORM Command
     # def write(self, vals):
     #     x = self.env['res.partner'].search([
