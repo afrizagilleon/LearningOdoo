@@ -4,6 +4,7 @@ from odoo import fields, models, api
 class Property(models.Model):
     _name = 'estate.property'  # the name Model
     _description = 'Property description'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True)
     state = fields.Selection([
@@ -18,7 +19,7 @@ class Property(models.Model):
     description = fields.Text(string='Description')
     postcode = fields.Char(string='Postcode')
     date_availability = fields.Datetime(string='Available From')
-    expected_price = fields.Float(string='Expected Price')
+    expected_price = fields.Float(string='Expected Price', tracking=True)
     selling_price = fields.Float(string='Selling Price', readonly=True)
     best_offer_price = fields.Float(string='Best Offer Price', compute='_compute_best_offer')
     bedrooms = fields.Integer(string='Bedrooms')
