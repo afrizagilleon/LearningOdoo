@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" />
-                    <field name="post_code" />
+                    <field name="postcode" />
                     <field name="date_availability" />
                     <field name="selling_price" />
                     <field name="best_offer_price" />
@@ -47,7 +47,7 @@
                 >
                     <field name="name"/>
                     <field name="date_availability"/>
-                    <field name="post_code"/>
+                    <field name="postcode"/>
                 </calendar>
             </field>
         </record>
@@ -70,7 +70,7 @@
                 <kanban default_group_by="state" on_create="quick_create" quick_create_view="real_estate_ads.quick_form_view">
                     <field name="name" />
                     <field name="state" />
-                    <field name="post_code" />
+                    <field name="postcode" />
                     <field name="buyer_id" />
                     <template>
                         <t t-name="kanban-box">
@@ -103,7 +103,7 @@
                 <form>
                     <field name="name" placeholder="Property Name"/>
                     <field name="tags_id" widget="many2many_tags" placeholder="Tags"/>
-                    <field name="post_code" placeholder="Post Code"/>
+                    <field name="postcode" placeholder="Post Code"/>
                 </form>
             </field>
         </record>
@@ -115,7 +115,7 @@
                 <search>
                     <field name="name" />
                     <field name="state" />
-                    <field name="post_code" />
+                    <field name="postcode" />
                     <field name="buyer_id" />
                     <filter string="New" name="sold_state" domain="[('state','=','new')]" />
                     <filter string="Sold" name="sold_state" domain="[('state','=','sold')]" />
@@ -163,7 +163,7 @@
                             <group>
                                 <field name="state"/>
                                 <field name="type_id"/>
-                                <field name="post_code"/>
+                                <field name="postcode"/>
                                 <field name="date_availability"/>
                             </group>
                             <group>

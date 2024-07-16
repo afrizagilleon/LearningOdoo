@@ -27,7 +27,11 @@
         'data/estate.property.type.csv',
 
         #demo
-        'demo/estate.property.tags.csv'
+        'demo/estate.property.tags.csv',
+        
+        # report
+        'report/property_report.xml',
+        'report/report_template.xml',
     ],
     'assets': {
         'web.assets_backend': [

@@ -16,7 +16,7 @@ class Property(models.Model):
     type_id = fields.Many2one('estate.property.type', string='Type')
     tags_id = fields.Many2many('estate.property.tags', string='Tags')
     description = fields.Text(string='Description')
-    post_code = fields.Char(string='Postcode')
+    postcode = fields.Char(string='Postcode')
     date_availability = fields.Datetime(string='Available From')
     expected_price = fields.Float(string='Expected Price')
     selling_price = fields.Float(string='Selling Price', readonly=True)
@@ -68,6 +68,9 @@ class Property(models.Model):
             else:
                 self.best_offer_price = 0
 
+    def _get_report_base_filename(self):
+        self.ensure_one()
+        return 'Estate Property - %s' % self.name
 
     # def action_url_action(self):
     #     return {
