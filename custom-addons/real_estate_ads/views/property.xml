@@ -154,6 +154,9 @@
                                     class="oe_stat_button" name="action_url_action" type="object">
                                 <field name="offer_count" class="p-3" string="Test URL Action" widget="statinfo"/>
                             </button>-->
+                            <button class="oe_stat_button" name="website_publish_button" type="object" icon="fa-globe">
+                                <field name="website_published" widget="website_publish_button"/>
+                            </button>
                         </div>
                         <group>
                             <field name="name" widget="char_emojis" placeholder="Masukkan nama"/>
@@ -207,8 +210,12 @@
                                     <page string="Other info">
                                         <group>
                                             <field name="sales_id" widget="many2one_avatar"/>
+                                            <!--<field name="campaign_id" />
+                                            <field name="source_id" />
+                                            <field name="medium_id" />-->
                                             <field name="buyer_id" />
                                             <field name="buyer_phone" widget="phone" />
+                                            <field name="website_url"/>
                                         </group>
                                     </page>
                                 </notebook>

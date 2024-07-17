@@ -4,7 +4,13 @@ from odoo import fields, models, api
 class Property(models.Model):
     _name = 'estate.property'  # the name Model
     _description = 'Property description'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = [
+        'mail.thread',
+        'mail.activity.mixin',
+        # 'utm.mixin',
+        'website.published.mixin',
+        'website.seo.metadata',
+    ]
 
     name = fields.Char(string='Name', required=True)
     state = fields.Selection([
@@ -72,6 +78,10 @@ class Property(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         return 'Estate Property - %s' % self.name
+
+    def _compute_website_url(self):
+        for rec in self:
+            rec.website_url = f'/properties/{rec.name}'
 
     # def action_url_action(self):
     #     return {
