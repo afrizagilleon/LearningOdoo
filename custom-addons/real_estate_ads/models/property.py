@@ -19,7 +19,7 @@ class Property(models.Model):
         ('accepted', 'Offer Accepted'),
         ('sold', 'Sold'),
         ('cancel', 'Canceled'),
-    ], default='new', string='Status', required=True)
+    ], default='new', string='Status', required=True, group_expand='_expand_estate')
     type_id = fields.Many2one('estate.property.type', string='Type')
     tags_id = fields.Many2many('estate.property.tags', string='Tags')
     description = fields.Text(string='Description')
@@ -82,6 +82,11 @@ class Property(models.Model):
     def _compute_website_url(self):
         for rec in self:
             rec.website_url = f'/properties/{rec.name}'
+
+    def _expand_estate(self, states, domain, order):
+        return [
+            key for key, dummy in type(self).state.selection
+        ]
 
     # def action_url_action(self):
     #     return {
