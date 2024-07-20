@@ -31,7 +31,9 @@ class Offer(models.Model):
     _description = "Offers of the property"
 
     name = fields.Char(string="Description", compute="_compute_name")
-    price = fields.Float(string="Price")
+    price = fields.Monetary(string="Price")
+    currency_id = fields.Many2one('res.currency', string='Currency',
+                                  default=lambda self: self.env.company.currency_id)
     status = fields.Selection(
         [('accepted', 'Accepted'), ('rejected', 'Rejected')],
         string="Status")

@@ -170,9 +170,12 @@
                                 <field name="date_availability"/>
                             </group>
                             <group>
-                                <field name="expected_price"/>
-                                <field name="best_offer_price"/>
-                                <field name="selling_price"/>
+                                <field name="expected_price"
+                                       widget="monetary"
+                                       groups="real_estate_ads.group_property_manager"/>
+                                <field name="best_offer_price" widget="monetary"/>
+                                <field name="selling_price" widget="monetary"/>
+                                <field name="currency_id" invisible="1"/>
                             </group>
 
                             <sheet>
@@ -194,7 +197,8 @@
                                         <field name="offer_ids" >
                                             <tree decoration-success="status=='accepted'" decoration-danger="status=='rejected'"
                                                   editable="bottom">
-                                                <field name="price"/>
+                                                <field name="price" widget="monetary"/>
+                                                <field name="currency_id" invisible="1"/>
                                                 <field name="partner_id"/>
                                                 <field name="creation_date"/>
                                                 <field name="validity"/>

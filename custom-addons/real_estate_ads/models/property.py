@@ -25,9 +25,9 @@ class Property(models.Model):
     description = fields.Text(string='Description')
     postcode = fields.Char(string='Postcode')
     date_availability = fields.Datetime(string='Available From')
-    expected_price = fields.Float(string='Expected Price', tracking=True)
-    selling_price = fields.Float(string='Selling Price', readonly=True)
-    best_offer_price = fields.Float(string='Best Offer Price', compute='_compute_best_offer')
+    expected_price = fields.Monetary(string='Expected Price', tracking=True)
+    selling_price = fields.Monetary(string='Selling Price', readonly=True)
+    best_offer_price = fields.Monetary(string='Best Offer Price', compute='_compute_best_offer')
     bedrooms = fields.Integer(string='Bedrooms')
     living_area = fields.Integer(string='Living Area(sqm)')
     facades = fields.Integer(string='Facades')
@@ -47,6 +47,8 @@ class Property(models.Model):
     sales_id = fields.Many2one('res.users', string='Salesman')
     buyer_id = fields.Many2one('res.partner', string='Buyer', domain=[('is_company', '=', True)])
     buyer_phone = fields.Char(string='Buyer Phone', related='buyer_id.phone')
+    currency_id = fields.Many2one('res.currency', string='Currency',
+                                  default=lambda self: self.env.company.currency_id)
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
