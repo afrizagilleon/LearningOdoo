@@ -22,6 +22,7 @@
         'views/property_tags.xml',
         'views/property_offer.xml',
         'views/menu_items.xml',
+        'views/property_web_template.xml',
 
         # data
         'data/estate.property.type.csv',
